@@ -17,8 +17,10 @@ for i in vbt03 vbt04; do
 
   # next stage, split the requests up by query path
   #./scripts/process-requests.ksh results/$i
-  ./scripts/process-split-requests.ksh results/$i
+  #./scripts/process-split-requests.ksh results/$i
 
+  # lastly, summerize by month
+  ./scripts/rollup-responses.ksh results/$i
 done
 
 #

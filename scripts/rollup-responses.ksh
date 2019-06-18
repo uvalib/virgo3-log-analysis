@@ -14,20 +14,26 @@ if [ ! -d $INDIR ]; then
    exit 1
 fi
 
-TMPFILE=/tmp/split-responses.$$
+TMPFILE=/tmp/rollup-responses.$$
 
 # find all the files
 find $INDIR -name *.responses.http-200 | sort > $TMPFILE
 
+SUMMERY_FILE=$INDIR/summery.http-200
+rm $SUMMERY_FILE > /dev/null 2>&1
+
 for file in $(<$TMPFILE); do
-   echo "processing $file..."
-   HISTFILE=$file.hist
-   PERCENTFILE=$file.percentile
-   ./scripts/response-histogram.ksh $file > $HISTFILE
-   ./scripts/report-percentiles.ksh $file > $PERCENTFILE
+   cat $file >> $SUMMERY_FILE
 done
 
 rm $TMPFILE
+
+# summery results too
+HISTFILE=$SUMMERY_FILE.hist
+PERCENTFILE=$SUMMERY_FILE.percentile
+echo "processing $SUMMERY_FILE..."
+./scripts/response-histogram.ksh $SUMMERY_FILE > $HISTFILE
+./scripts/report-percentiles.ksh $SUMMERY_FILE > $PERCENTFILE
 
 exit 0
 
