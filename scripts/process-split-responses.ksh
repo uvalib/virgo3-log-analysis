@@ -1,5 +1,5 @@
 #
-# script to run all the response files and generate histograms
+# script to process all the response files and generate summery information
 #
 
 if [ $# -ne 1 ]; then
@@ -14,7 +14,7 @@ if [ ! -d $INDIR ]; then
    exit 1
 fi
 
-TMPFILE=/tmp/process.$$
+TMPFILE=/tmp/split-responses.$$
 
 # find all the files
 find $INDIR -name *.responses.http-200 | sort > $TMPFILE

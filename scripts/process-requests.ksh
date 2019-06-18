@@ -1,5 +1,5 @@
 #
-# script to process all the response files
+# script to process all the request files
 #
 
 if [ $# -ne 1 ]; then
@@ -14,14 +14,14 @@ if [ ! -d $INDIR ]; then
    exit 1
 fi
 
-TMPFILE=/tmp/responses.$$
+TMPFILE=/tmp/requests.$$
 
 # find all the files
-find $INDIR -name *.responses | sort > $TMPFILE
+find $INDIR -name *.requests | sort > $TMPFILE
 
 for file in $(<$TMPFILE); do
    echo "processing $file..."
-   ./scripts/split-responses.ksh $file
+   ./scripts/split-requests.ksh $file
 done
 
 rm $TMPFILE
