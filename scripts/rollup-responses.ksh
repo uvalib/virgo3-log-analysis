@@ -1,5 +1,5 @@
 #
-# script to process all the response files and generate summery information
+# script to process all the response files and generate summary information
 #
 
 if [ $# -ne 1 ]; then
@@ -19,22 +19,22 @@ TMPFILE=/tmp/rollup-responses.$$
 # find all the files
 find $INDIR -name *.responses.http-200 | sort > $TMPFILE
 
-SUMMERY_FILE=$INDIR/summery.http-200
-rm $SUMMERY_FILE > /dev/null 2>&1
+SUMMARY_FILE=$INDIR/summary.http-200
+rm $SUMMARY_FILE > /dev/null 2>&1
 
 for file in $(<$TMPFILE); do
-   cat $file >> $SUMMERY_FILE
+   cat $file >> $SUMMARY_FILE
 done
 
 rm $TMPFILE
 
-# summery results too
-HISTFILE=$SUMMERY_FILE.hist
-PERCENTFILE=$SUMMERY_FILE.percentile
-echo "processing $SUMMERY_FILE..."
-./scripts/response-histogram.ksh $SUMMERY_FILE > $HISTFILE
+# summary results too
+HISTFILE=$SUMMARY_FILE.hist
+PERCENTFILE=$SUMMARY_FILE.percentile
+echo "processing $SUMMARY_FILE..."
+./scripts/response-histogram.ksh $SUMMARY_FILE > $HISTFILE
 echo "histogram available in $HISTFILE..."
-./scripts/report-percentiles.ksh $SUMMERY_FILE > $PERCENTFILE
+./scripts/report-percentiles.ksh $SUMMARY_FILE > $PERCENTFILE
 echo "percentiles available in $PERCENTFILE..."
 
 exit 0

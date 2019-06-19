@@ -1,5 +1,5 @@
 #
-# script to process all the request files and generate summery information
+# script to process all the request files and generate summary information
 #
 
 if [ $# -ne 1 ]; then
