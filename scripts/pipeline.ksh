@@ -2,11 +2,13 @@
 # pipeline to process the virgo logs into something meaningfull
 #
 
-SOURCE_DIR=source
-RESULTS_DIR=results
+LOG_SET=may-june
+SOURCE_DIR=../$LOG_SET/logs
+RESULTS_DIR=../$LOG_SET/results
+INTERESTING_SERVERS="vbt03 vbt04"
 
 # the interesting result sets
-for i in vbt03 vbt04; do
+for i in $INTERESTING_SERVERS; do
 
    mkdir -p $RESULTS_DIR/$i
 

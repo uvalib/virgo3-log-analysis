@@ -33,9 +33,9 @@ HISTFILE=$SUMMARY_FILE.hist
 PERCENTFILE=$SUMMARY_FILE.percentile
 echo "processing $SUMMARY_FILE..."
 ./scripts/response-histogram.ksh $SUMMARY_FILE > $HISTFILE
-echo "histogram available in $HISTFILE..."
+echo "histogram available in $HISTFILE"
 ./scripts/report-percentiles.ksh $SUMMARY_FILE > $PERCENTFILE
-echo "percentiles available in $PERCENTFILE..."
+echo "percentiles available in $PERCENTFILE"
 
 exit 0
 

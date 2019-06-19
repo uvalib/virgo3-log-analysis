@@ -23,7 +23,7 @@ for file in $(<$TMPFILE); do
    echo "processing $file..."
    HISTFILE=$file.hist
    ./scripts/request-histogram.ksh $file > $HISTFILE
-   echo "histogram available in $HISTFILE..."
+   echo "histogram available in $HISTFILE"
 done
 
 rm $TMPFILE

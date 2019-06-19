@@ -24,9 +24,9 @@ for file in $(<$TMPFILE); do
    HISTFILE=$file.hist
    PERCENTFILE=$file.percentile
    ./scripts/response-histogram.ksh $file > $HISTFILE
-   echo "histogram available in $HISTFILE..."
+   echo "histogram available in $HISTFILE"
    ./scripts/report-percentiles.ksh $file > $PERCENTFILE
-   echo "percentiles available in $PERCENTFILE..."
+   echo "percentiles available in $PERCENTFILE"
 done
 
 rm $TMPFILE

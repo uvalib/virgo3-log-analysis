@@ -23,23 +23,20 @@ SUMMARY_FILE=$INDIR/summary.requests
 rm $SUMMARY_FILE > /dev/null 2>&1
 
 for file in $(<$TMPFILE); do
-   DAILY_COUNT=$(grep "total requests" $file | awk '{print $1}')
-   echo "$file Cnt: $DAILY_COUNT"
-   MAX_REQUESTS=$(grep "Max requests" $file | awk '{print $3}')
-   echo "$file Mx: $MAX_REQUESTS"
-# >> $SUMMARY_FILE
+   DATE=$(basename $file ".requests.summary")
+   TOTAL=$(grep "total requests" $file | awk '{print $1}')
+   MAX_HOUR=$(grep "Max requests" $file | awk '{print $3}')
+   echo "$DATE total requests: $TOTAL"  >> $SUMMARY_FILE
+   echo "$DATE max/hour: $MAX_HOUR"  >> $SUMMARY_FILE
+   echo "" >> $SUMMARY_FILE
 done
 
 rm $TMPFILE
 
-# summary results too
-#HISTFILE=$SUMMARY_FILE.hist
-#PERCENTFILE=$SUMMARY_FILE.percentile
-#echo "processing $SUMMARY_FILE..."
-#./scripts/response-histogram.ksh $SUMMARY_FILE > $HISTFILE
-#echo "histogram available in $HISTFILE..."
-#./scripts/report-percentiles.ksh $SUMMARY_FILE > $PERCENTFILE
-#echo "percentiles available in $PERCENTFILE..."
+grep "total requests" $SUMMARY_FILE | awk '{print $4, $1}' | sort -n | tail -1 | awk '{printf "Most requests: %s (on %s)\n", $1, $2}' >> $SUMMARY_FILE
+grep "max/hour" $SUMMARY_FILE | awk '{print $3, $1}' | sort -n | tail -1 | awk '{printf "Max/hour: %s (on %s)\n", $1, $2}' >> $SUMMARY_FILE
+
+echo "summary available $SUMMARY_FILE"
 
 exit 0
 
