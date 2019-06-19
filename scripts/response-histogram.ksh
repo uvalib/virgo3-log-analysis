@@ -3,14 +3,14 @@
 #
 
 if [ $# -ne 1 ]; then
-   echo "use: $(basename $0) <infile>"
+   echo "use: $(basename $0) <infile>" >&2
    exit 1
 fi
 
 INFILE=$1
 
 if [ ! -f $INFILE ]; then
-   echo "ERROR: $INFILE does not exist or is not readable"
+   echo "ERROR: $INFILE does not exist or is not readable" >&2
    exit 1
 fi
 
@@ -18,7 +18,7 @@ TOOL_NAME=hist
 which $TOOL_NAME > /dev/null 2>&1
 res=$?
 if [ $res -ne 0 ]; then
-   echo "$TOOL_NAME is not available in this environment"
+   echo "$TOOL_NAME is not available in this environment" >&2
    exit 1
 fi
 

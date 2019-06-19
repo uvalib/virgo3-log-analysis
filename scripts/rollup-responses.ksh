@@ -3,14 +3,14 @@
 #
 
 if [ $# -ne 1 ]; then
-   echo "use: $(basename $0) <in directory>"
+   echo "use: $(basename $0) <in directory>" >&2
    exit 1
 fi
 
 INDIR=$1
 
 if [ ! -d $INDIR ]; then
-   echo "ERROR: $INDIR does not exist or is not readable"
+   echo "ERROR: $INDIR does not exist or is not readable" >&2
    exit 1
 fi
 
@@ -33,7 +33,9 @@ HISTFILE=$SUMMERY_FILE.hist
 PERCENTFILE=$SUMMERY_FILE.percentile
 echo "processing $SUMMERY_FILE..."
 ./scripts/response-histogram.ksh $SUMMERY_FILE > $HISTFILE
+echo "histogram available in $HISTFILE..."
 ./scripts/report-percentiles.ksh $SUMMERY_FILE > $PERCENTFILE
+echo "percentiles available in $PERCENTFILE..."
 
 exit 0
 

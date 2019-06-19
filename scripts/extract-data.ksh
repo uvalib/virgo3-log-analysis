@@ -3,7 +3,7 @@
 #
 
 if [ $# -ne 2 ]; then
-   echo "use: $(basename $0) <infile> <outfile base>"
+   echo "use: $(basename $0) <infile> <outfile base>" >&2
    exit 1
 fi
 
@@ -11,7 +11,7 @@ INFILE=$1
 OUTBASE=$2
 
 if [ ! -f $INFILE ]; then
-   echo "ERROR: $INFILE does not exist or is not readable"
+   echo "ERROR: $INFILE does not exist or is not readable" >&2
    exit 1
 fi
 
